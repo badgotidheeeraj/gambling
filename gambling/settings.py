@@ -66,8 +66,6 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-# ADMIN_SITE = 'rnr_apis.admin.CustomAdminSite'
-
 WSGI_APPLICATION = 'gambling.wsgi.application'
 
 
@@ -118,15 +116,27 @@ TEMPLATES = [
 ]
 
 
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
+
+
+REDIS_HOST = os.getenv('REDIS_HOST', '127.0.0.1')  # default localhost
+REDIS_PORT = int(os.getenv('REDIS_PORT', 6379))   # default Redis port
+
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [(REDIS_HOST, REDIS_PORT)],
         },
     },
 }
-
 
 
 DATABASES = {
