@@ -81,11 +81,11 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "https://reqrev.com",
-    "http://localhost:8081",
-    "http://192.168.29.12:3000"
+    "https://gambling-24ru.onrender.com",
+    "exp://127.0.0.1:19000",
+    "http://localhost:19006",  # Expo web (optional, for local dev)
+    "http://localhost:8000",   # Django local (optional, for local dev)
+    "https://your-expo-domain.com",  # If you have a custom Expo web domain
 ]
 
 CORS_ALLOW_METHODS = (
