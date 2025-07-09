@@ -9,10 +9,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1", "t")
 
 
-ALLOWED_HOSTS = ["127.0.0.1", 'localhost', 'api.reqrev.com',"192.168.40.50"]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 ASGI_APPLICATION = "gambling.asgi.application"
 
@@ -129,20 +129,6 @@ CHANNEL_LAYERS = {
 
 
 
-# tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': tmpPostgres.path.replace('/', ''),
-#         'USER': tmpPostgres.username,
-#         'PASSWORD': tmpPostgres.password,
-#         'HOST': tmpPostgres.hostname,
-#         'PORT': 5432,
-#         'OPTIONS': dict(parse_qsl(tmpPostgres.query)),
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -218,28 +204,6 @@ CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Redis as the message broker
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
-
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gambling.settings')
-
-# django.setup()
-
-# from email_config.utils import get_email_config
-# config = get_email_config()
-
-# # Ensure that the config is not None
-# if config:
-#     EMAIL_BACKEND = str(config['EMAIL_BACKEND'])
-#     EMAIL_HOST = str(config['EMAIL_HOST'])
-#     EMAIL_PORT = str(config['EMAIL_PORT'])
-#     EMAIL_USE_TLS = str(config['EMAIL_USE_TLS'])
-#     EMAIL_HOST_USER = str(config['EMAIL_HOST_USER'])
-#     EMAIL_HOST_PASSWORD = str(config['EMAIL_HOST_PASSWORD'])
-#     DEFAULT_FROM_EMAIL = str(config['DEFAULT_FROM_EMAIL'])
-    
-# else:
-#     print("Email configuration not found.")
-
-
 
 
 RAZORPAY_KEY_ID = 'rzp_test_guyHKbO1I6W9g3'
